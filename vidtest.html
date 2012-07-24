@@ -1,0 +1,51 @@
+<html>
+<head>
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+<script type="text/javascript">
+	var apiKey = "16801412"; // Replace with your API key. See http://www.tokbox.com/
+	var sessionID = "2_MX4xNjgwMTQxMn5-MjAxMi0wNy0yNCAyMjo1OToxOC4zNDQyODkrMDA6MDB-MC4xNTQyODA0MzQxODJ-"; // Replace with your own session ID.
+	                    // See http://www.tokbox.com/opentok/api/tools/generator
+	var token = "devtoken"; // Replace with a generated token that has been assigned the moderator role.
+	                // See http://www.tokbox.com/opentok/api/tools/generator
+
+	var session = TB.initSession(sessionID);
+
+	TB.setLogLevel(TB.DEBUG);
+
+	session.addEventListener("sessionConnected", sessionConnectHandler);
+	session.addEventListener("streamCreated", streamCreatedHandler);
+
+	session.connect(apiKey, token);
+
+	function sessionConnectHandler(sessionConnectEvent) {
+	    session.publish("thing");
+
+	    for(var i = 0; i < event.streams.length; i++) {
+	    	if (session.connection.connectId != event.streams[i].connection.connectionId) {
+	    		subscribeToStream(event.streams[i]);
+	    	}
+	    }
+	}
+
+	function streamCreatedHandler(event) {
+		for(var i = 0; i < event.streams.length; i++) {
+	    	if (session.connection.connectId != event.streams[i].connection.connectionId) {
+	    		subscribeToStream(event.streams[i]);
+	    	}
+	    }
+	}
+
+	function subscribeToStream(stream) {
+		var div = document.createElement('div');
+		div.setAttribute('id','stream-' + stream.streamId);
+		document.body.appendChild(div);
+
+		session.subscribe(stream, div.id);
+	}
+	
+</script>
+</head>
+<body>
+	<div id="thing"></div>
+</body>
+</html>
