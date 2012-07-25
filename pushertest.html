@@ -13,7 +13,7 @@
     // Flash fallback logging - don't include this in production
     WEB_SOCKET_DEBUG = true;
 
-    var pusher = new Pusher( 'b31d655fa7f11bd6f11d');
+    var pusher = new Pusher("pusher_application_key");
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(data) {
       alert("an event was triggered with message: " + data.message);
