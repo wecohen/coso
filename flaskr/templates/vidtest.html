@@ -1,48 +1,7 @@
 <html>
 <head>
 <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
-<script type="text/javascript">
-
-
-	var session = TB.initSession(config.OT_sessionID);
-
-	TB.setLogLevel(TB.DEBUG);
-
-	session.addEventListener("sessionConnected", sessionConnectHandler);
-	session.addEventListener("streamCreated", streamCreatedHandler);
-
-	session.connect(config.OT_apiKey, config.OT_token);
-
-	function sessionConnectHandler(event) {
-	    session.publish("thing");
-
-	    for(var i = 0; i < event.streams.length; i++) {
-	    	target_stream = event.streams[i]
-	    	if (session.connection.connectionId != target_stream.connection.connectionId) {
-	    		subscribeToStream(event.streams[i]);
-	    		}
-	    	}
-		}
-
-	function streamCreatedHandler(event) {
-		for(var i = 0; i < event.streams.length; i++) {
-	    	target_stream = event.streams[i];
-
-	    	if (session.connection.connectionId != target_stream.connection.connectionId) {
-	    		subscribeToStream(target_stream);
-	    		}
-	    	}
-		}
-
-	function subscribeToStream(stream) {
-		var div = document.createElement('div');
-		div.setAttribute('id','stream-' + stream.streamId);
-		document.body.appendChild(div);
-
-		session.subscribe(stream, div.id);
-	}
-	
-</script>
+<script type="text/javascript" src="vid.js"></script>
 </head>
 <body>
 	<div id="thing"></div>

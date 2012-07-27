@@ -11,9 +11,16 @@ pusher.app_id = config.pusher_app_id
 pusher.key = config.pusher_key
 pusher.secret = config.pusher_secret
 
+OT_sessionID = config.OT_sessionID
+OT_apiKey = config.OT_apiKey
+OT_token = config.OT_token
+
 @app.before_request
 def setup_function():
-    g.pusher = pusher.Pusher()
+	g.OT_sessionID = config.OT_sessionID
+	g.OT_apiKey = config.OT_apiKey
+	g.OT_token = config.OT_token
+	g.pusher = pusher.Pusher()
 
 
 @app.route ("/")
