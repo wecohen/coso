@@ -10,7 +10,7 @@ session.addEventListener("streamCreated", streamCreatedHandler);
 session.connect(OT_apiKey, OT_token);
 
 function sessionConnectHandler(event) {
-    session.publish("thing");
+    session.publish("user_video");
 
     for(var i = 0; i < event.streams.length; i++) {
     	target_stream = event.streams[i]
@@ -31,9 +31,8 @@ function streamCreatedHandler(event) {
 	}
 
 function subscribeToStream(stream) {
-	var div = document.createElement('div');
-	div.setAttribute('id','stream-' + stream.streamId);
-	document.body.appendChild(div);
-
-	session.subscribe(stream, div.id);
+    var $div = $('<div/>');
+    $("#feeds").append($div);
+    $div.attr('id','stream-' + stream.streamId);
+	session.subscribe(stream, $div.attr("id"));
 }
