@@ -8,6 +8,7 @@ var pusher = new Pusher('b31d655fa7f11bd6f11d');
 var channel = pusher.subscribe('channel_name');
 channel.bind('URL_change', function(data) {
   $("iframe#main_frame").attr("src", data['url']);
+  $("input#destination_url").attr("value", data['url']);
 });
 
 function navigate_request() {
@@ -25,7 +26,7 @@ $(document).ready(function() {
 </head>
 
 <body>
-	<input type="text" id="destination_url" size="100"></input>
+	<input type="text" id="destination_url" size="100" value=""></input>
 	<a href="" id="navigate" class="button">Go</a>
 
 	<iframe id="main_frame" width="600" height="600" src="http://www.forever21.com/">
