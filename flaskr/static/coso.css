@@ -1,6 +1,34 @@
 body {
-	
+	font-family: 'Karla', sans-serif;
 }
-div#video {
-	border: solid;
+div#browser {
+	width: 70%;
+	float: left;
+	border-color: #D1D1D1;
+	background-color: #D1D1D1;
+	border-radius: 5px;
+	border: 2px;
+	box-shadow: 5px 5px 5px #B2B2B2;
+	padding: 5px;
+}
+div#myvid {
+	width: 25%;
+	float: left;
+	margin-left: 2%;
+}
+div#feeds {
+	width: 70%;
+}
+iframe#main_frame {
+	width: 100%;
+}
+input#destination_url {
+
+}
+a#navigate {
+	width: 10%;
+	border-radius: 15px;
+	border: 2px;
+	border-color:#B5D6A1;
+	color: #343434;
 }
