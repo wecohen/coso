@@ -9,11 +9,19 @@ channel.bind('URL_change', function(data) {
 
 function navigate_request() {
     var destination = $("input#destination_url").val();
+    if(destination.substring(0, 4) != "http"){
+        destination = "http://" + destination;
+    }
     $.get("http://localhost:5000/navigate", 
             {"destination_url" : destination});
     return false;
 }
 
 $(document).ready(function() {
+	$("input#destination_url").keyup(function(event){
+    if(event.keyCode == 13){
+        $("a#navigate").click();
+    }});
+
     $("a#navigate").click(navigate_request);
 });
