@@ -23,10 +23,18 @@ var url_enter = function(event) {
     }
 };
 
+var message_listener = function(event) {
+    if (event.origin === _target_frame.location.origin) {
+            console.log(event.data);        
+    }
+};
+
 var hide_paragraph = function(event) {
 	console.log("Trying to hide")
     $(this).slideUp();
 };
+
+var _target_frame = null;
 
 var main = function() {
 	$("input#destination_url").keyup(url_enter);
@@ -36,6 +44,12 @@ var main = function() {
     $("iframe#main_frame").click(hide_paragraph);
 
     $("a#navigate").click(navigate_request);
+
+    _target_frame = $("iframe")[0].contentWindow;
+    window.onmessage = message_listener;
 };
 
+function connect_target() {
+    _target_frame.postMessage("Connect", "*");
+}
 $(document).ready(main);
