@@ -17,11 +17,25 @@ function navigate_request() {
     return false;
 }
 
-$(document).ready(function() {
-	$("input#destination_url").keyup(function(event){
-    if(event.keyCode == 13){
+var url_enter = function(event) {
+    if(event.keyCode == 13)	{
         $("a#navigate").click();
-    }});
+    }
+};
+
+var hide_paragraph = function(event) {
+	console.log("Trying to hide")
+    $(this).slideUp();
+};
+
+var main = function() {
+	$("input#destination_url").keyup(url_enter);
+
+    $("p#test").click(hide_paragraph);
+    
+    $("iframe#main_frame").click(hide_paragraph);
 
     $("a#navigate").click(navigate_request);
-});
+};
+
+$(document).ready(main);
