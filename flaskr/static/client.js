@@ -13,7 +13,6 @@ var install_message_listener = function(e) {
 	if (__origin === "http://localhost:5000") {
 		__my_parent_win = win;
 		__my_parent_win.postMessage("Success, dude", "*");
-
 		window.onmessage = apply_event;
 	};
 };
