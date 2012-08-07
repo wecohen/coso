@@ -9,9 +9,6 @@ var install_message_listener = function(e) {
 	__origin = e.origin;
 	var data = e.data;
 	var win = e.source;
-    console.log(__origin);
-    console.log(data);
-    console.log(win);
 	if (__origin === "http://localhost:5000") {
 		__my_parent_win = win;
 		__my_parent_win.postMessage({"type": "location", "val": window.location.href}, "*");
@@ -40,7 +37,5 @@ var install_coso = function() {
 	document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
 };
 
-//window.onload = event_wrapper(window.onload, _onload_fn);
-console.log(document.body);
 setTimeout("install_coso();", 100);
 

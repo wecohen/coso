@@ -3,29 +3,35 @@
 var pusher = new Pusher('b31d655fa7f11bd6f11d');
 var channel = pusher.subscribe('channel_name');
 channel.bind('URL_change', function(data) {
-    $("iframe#main_frame").attr("src", data['url']);
-    var new_url = $("#main_frame").get(0).contentWindow.location.href;
-    console.log(new_url)
-    $("input#destination_url").attr("value", new_url);
+	if ("iframe#main_frame".attr("src") != data['url']){
+    	$("iframe#main_frame").attr("src", data['url']);
+    	}
+    $("input#destination_url").attr("value", data['url']);
 });
 channel.bind('click', function(data) {
 	$(document.elementFromPoint(data['x'], data['y'])).click();
-    // $("iframe#main_frame").click(data['x'], data['y']);
     $("input#destination_url").attr("value", data['']); //COME UP WITH HOW TO GET CURRENT URL
 });
+
+function navigate(url) {
+	$("iframe#main_frame").attr("src", url);
+	return false;
+}
 
 function navigate_request() {
     var destination = $("input#destination_url").val();
     if(destination.substring(0, 4) != "http"){
         destination = "http://" + destination;
     }
-    $.get("http://localhost:5000/navigate", 
-            {"destination_url" : destination});
+    navigate(destination);
+    // $.get("http://localhost:5000/navigate", 
+    //         {"destination_url" : destination});
     return false;
 }
 function back() {
 	var previous = history.go(-1);
-	$.get("http://localhost:5000/navigate", {"destination_url" : previous});
+	navigate(previous);
+	// $.get("http://localhost:5000/navigate", {"destination_url" : previous});
 	return false;
 }
 function forward() {
@@ -50,7 +56,10 @@ var message_listener = function(event) {
 			return false;
         }
         else if (event.data.type == "location") {
-            $("input#destination_url").val(event.data.val);    
+        	var new_url = event.data.val;
+            $("input#destination_url").val(new_url);
+   //          $.get("http://localhost:5000/navigate", {"destination_url" : new_url});
+			// return false;
         }
 //    }
 };
@@ -70,7 +79,6 @@ var main = function() {
 
     _target_frame = $("iframe")[0].contentWindow;
     window.onmessage = message_listener;
-    // setTimeout("connect_target()", 500);
 };
 
 function connect_target() {
