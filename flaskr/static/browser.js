@@ -41,7 +41,7 @@ var url_enter = function(event) {
 };
 
 var message_listener = function(event) {
-    if (event.origin === _target_frame.location.origin) {
+//    if (event.origin === _target_frame.location.origin) {
         console.log(event.data);
         if (event.data.type == "click") {
         	console.log("It was a click at " + event.data.target[0] + " " + event.data.target[1]);
@@ -49,20 +49,28 @@ var message_listener = function(event) {
 				{"x": event.data.target[0], "y": event.data.target[1]});
 			return false;
         }
-    }
+        else if (event.data.type == "location") {
+            $("input#destination_url").val(event.data.val);    
+        }
+//    }
 };
 
 var _target_frame = null;
+
+var url_change_listener = function() {
+    connect_target();
+};
 
 var main = function() {
 	$("input#destination_url").keyup(url_enter);
     $("a#navigate").click(navigate_request);
     $("a#back").click(back);
     $("a#forward").click(forward);
+    $("iframe#main_frame").load(url_change_listener);
 
     _target_frame = $("iframe")[0].contentWindow;
     window.onmessage = message_listener;
-    setTimeout("connect_target()", 500);
+    // setTimeout("connect_target()", 500);
 };
 
 function connect_target() {

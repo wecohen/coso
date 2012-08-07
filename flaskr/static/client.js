@@ -9,22 +9,38 @@ var install_message_listener = function(e) {
 	__origin = e.origin;
 	var data = e.data;
 	var win = e.source;
-
+    console.log(__origin);
+    console.log(data);
+    console.log(win);
 	if (__origin === "http://localhost:5000") {
 		__my_parent_win = win;
-		__my_parent_win.postMessage("Success, dude", "*");
+		__my_parent_win.postMessage({"type": "location", "val": window.location.href}, "*");
 		window.onmessage = apply_event;
 	};
 };
 
-var send_event = function(e) {
-	__my_parent_win.postMessage({"type": e.type, "target": [e.pageX, e.pageY]}, "*")
-};
-
 window.onmessage = install_message_listener;
 
-$(document).ready(function() {
-	$("body").click(function(e) {
-		send_event(e);
+var event_wrapper = function(fn1, fn2) {
+	return (function(event) {
+		fn2(event);
+		if (fn1 !== null) {
+			fn1(event);
+		}
 	});
-});
+};
+
+var our_click_handler = function(event) {
+    if (__my_parent_win !== null) {
+        __my_parent_win.postMessage({"type": "click", "target": [event.pageX, event.pageY]}, "*");
+    }
+};
+
+var install_coso = function() {
+	document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
+};
+
+//window.onload = event_wrapper(window.onload, _onload_fn);
+console.log(document.body);
+setTimeout("install_coso();", 100);
+
