@@ -25,6 +25,11 @@ def setup_function():
 def home():
 	return render_template("screentest.html")
 
+def create_session_id():
+	unique_session = opentok_sdk.create_session()
+	print unique_session.session_id
+	return unique_session.session_id
+
 @app.route ("/session")
 def create_session():
 	print "bloop"
