@@ -1,0 +1,26 @@
+<html>
+<head>
+<title> COSO </title>
+<link rel="stylesheet" type="text/css" href="static/coso.css">
+<link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
+<script>
+//var OT_sessionID = "{{g.OT_sessionID}}";
+var OT_apiKey = "{{g.OT_apiKey}}";
+//var OT_token = "{{g.OT_token}}";
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+<!-- <script src="http://static.opentok.com/v0.91/js/TB.min.js"></script> -->
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+<script type="text/javascript" src="static/vid.js"></script>
+<script type="text/javascript" src="static/browser.js"></script>
+</head>
+<body>
+<div id = "content">
+	{% block content %}
+	{% endblock %}
+</div>	
+
+</body>
+
+</html>
