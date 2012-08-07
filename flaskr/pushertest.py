@@ -11,21 +11,34 @@ pusher.app_id = config.pusher_app_id
 pusher.key = config.pusher_key
 pusher.secret = config.pusher_secret
 
-OT_sessionID = config.OT_sessionID
+
 OT_apiKey = config.OT_apiKey
-OT_token = config.OT_token
+
 
 @app.before_request
 def setup_function():
-	g.OT_sessionID = config.OT_sessionID
 	g.OT_apiKey = config.OT_apiKey
-	g.OT_token = config.OT_token
 	g.pusher = pusher.Pusher()
 
 
 @app.route ("/")
 def home():
 	return render_template("screentest.html")
+
+@app.route ("/session")
+def create_session():
+	print "bloop"
+	session_id = create_session_id()
+	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
+	print "this is my" + unique_token
+	# return jsonify(session_id = session_id, unique_token = unique_token)
+	return render_template("screentest.html", session_id=session_id, unique_token=unique_token)	
+
+@app.route("/join", methods = "GET")
+def join_session():
+	session_id = request.form("session_id")
+	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
+	return render_template("screentest.html", session_id = session_id)
 
 @app.route("/navigate")
 def navigate():
