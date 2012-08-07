@@ -33,6 +33,20 @@ def navigate():
     g.pusher['channel_name'].trigger("URL_change", {"url": dest_url})
     return ""
 
+@app.route("/click")
+def click():
+	x, y = request.args['x'], request.args['y']
+	g.pusher['channel_name'].trigger("click", {"x": x, "y": y})
+	return ""
+
+@app.route ("/test1")
+def test1():
+	return render_template("playground.html")
+
+@app.route ("/test2")
+def test2():
+	return render_template("test2.html")
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")
 
