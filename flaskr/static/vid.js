@@ -4,7 +4,7 @@ var session = TB.initSession(OT_sessionID);
 
 
 
-TB.setLogLevel(TB.DEBUG);
+// TB.setLogLevel(TB.DEBUG);
 
 session.addEventListener("sessionConnected", sessionConnectHandler);
 session.addEventListener("streamCreated", streamCreatedHandler);

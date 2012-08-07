@@ -2,7 +2,7 @@ body {
 	font-family: 'Karla', sans-serif;
 }
 div#browser {
-	width: 70%;
+	width: 85%;
 	height: 99%;
 	float: left;
 	border-color: #D1D1D1;
@@ -14,9 +14,9 @@ div#browser {
 	/*border: 2px solid blue;*/
 }
 div#myvid {
-	width: 25%;
+	width: 10%;
 	float: left;
-	margin-left: 2%;
+	margin: 0 1%;
 	/*border: 2px solid yellow;*/
 }
 div#feeds {
@@ -27,8 +27,8 @@ iframe#main_frame {
 	height: 93%;
 }
 input#destination_url {
-	size: 94%;
-	width: 94%;
+	size: 80%;
+	width: 80%;
 }
 a#navigate {
 	width: 5%;
