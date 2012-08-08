@@ -65,7 +65,7 @@ a.button:hover {
 	background-color:#608848;
 }*/
 div#head {
-    border: 1px solid red;
+  /*  border: 1px solid red;*/
     height: 45px;
     position: relative;
     background-color: #0096A2;
@@ -82,16 +82,37 @@ div#head h1 {
 }
 
 div#main {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     position: relative;
-    background-color: #B5B3AF;
-    min-height: 480px;
+    background-color: #5AC7A7;
+    min-height: 78%;
+    opacity: .8;
 }
 
 
 div#foot {
-    border: 1px solid green;
-    
+	background-color: #E3E1DC;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	
+
+    /*border: 1px solid green;*/
+
+}
+
+div#foot#about_closed{
+	padding: 5px;
+	margin: 0px;
+	border: 1px solid gray;
+	background-color: #E3E1DC;
+
+}
+
+div#foot#about_opened{
+	display: none;
+	height: 300px;
+	border: 1px solid gray;
 }
 
 div.panel {
@@ -101,8 +122,9 @@ div.panel {
     position: absolute;
     left: 50%;
     top: 60px;
-    border: 1px solid #bbb;
+    /*border: 1px solid #bbb;*/
     border-radius: 10px;
+   
 }
 
 div#left {
@@ -111,47 +133,61 @@ div#left {
     float: left;
     height: 120px;
     margin-top: 30px;
+    padding-top: 15px;
     margin-bottom: 30px;
     border-right: 1px solid #ccc;
 }
 
+div#left h2{
+	padding-bottom: 15px;
+}
+
 div#right {
     text-align: center;
+    padding-top: 15px;
+    padding-bottom: 0px;
     margin-left: 300px;
     width: 300px;
     height: 150px;
     margin-top: 30px;
+
 }
 
-input {
-    margin-bottom: 15px;
+div#right h2{
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
+
+input#session_id {
+    margin-bottom: 10px;
+    padding-top: 0px;
+}
+
 
 .button {
-	-moz-box-shadow:inset -1px 1px 5px 2px #caefab;
-	-webkit-box-shadow:inset -1px 1px 5px 2px #caefab;
-	box-shadow:inset -1px 1px 5px 2px #caefab;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
-	background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
-	background-color:#77d42a;
+	-moz-box-shadow:inset -1px 1px 5px 2px #bee2f9;
+	-webkit-box-shadow:inset -1px 1px 5px 2px #bee2f9;
+	box-shadow:inset -1px 1px 5px 2px #bee2f9;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #63b8ee), color-stop(1, #468ccf) );
+	background:-moz-linear-gradient( center top, #63b8ee 5%, #468ccf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#63b8ee', endColorstr='#468ccf');
+	background-color:#63b8ee;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
-	border:1px solid #268a16;
+	border:1px solid #3866a3;
 	display:inline-block;
-	color:#306108;
+	color:#14396a;
 	font-family:Verdana;
-	font-size:28px;
+	font-size:24px;
 	font-weight:bold;
 	padding:5px 30px;
 	text-decoration:none;
-	text-shadow:1px 1px 5px #aade7c;
 }.button:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
-	background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
-	background-color:#5cb811;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #468ccf), color-stop(1, #63b8ee) );
+	background:-moz-linear-gradient( center top, #468ccf 5%, #63b8ee 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#468ccf', endColorstr='#63b8ee');
+	background-color:#468ccf;
 }.button:active {
 	position:relative;
 	top:1px;

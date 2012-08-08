@@ -1,7 +1,8 @@
 import config
 import pusher
+import OpenTokSDK
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar("FLASKR_SETTINGS", silent = True)
@@ -11,8 +12,12 @@ pusher.app_id = config.pusher_app_id
 pusher.key = config.pusher_key
 pusher.secret = config.pusher_secret
 
-
+OT_sessionID = config.OT_sessionID
 OT_apiKey = config.OT_apiKey
+api_secret = config.OT_apiSecret
+OT_token = config.OT_token
+api_url = "https://api.opentok.com/hl"
+opentok_sdk = OpenTokSDK.OpenTokSDK(OT_apiKey, api_secret, staging=True)
 
 
 @app.before_request
@@ -23,7 +28,7 @@ def setup_function():
 
 @app.route ("/")
 def home():
-	return render_template("screentest.html")
+	return render_template("homepage.html")
 
 def create_session_id():
 	unique_session = opentok_sdk.create_session()

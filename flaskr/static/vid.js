@@ -1,17 +1,12 @@
 // videochat js
 var publisher;
 
-
-
-
 TB.setLogLevel(TB.DEBUG);
 
-
-
-//BUTTON FUNCTIONS IN OT
-
-// document.ready
-
+function sessionConnect(){
+    session.connect(OT_apiKey, $("unique_token"));
+    //link to a connect button in the html
+}
 
 function sessionDisconnect() {
             session.disconnect();
@@ -89,8 +84,10 @@ function subscribeToStream(stream) {
 	session.subscribe(stream, $div.attr("id"));
 }
 
+
+
 var main = function() {
-    // $("input#connectLink").click(sessionConnect);
+    // $("#connectLink").click(sessionConnect);
     // $("input#disconnectLink").click(sessionDisconnect);
     // session.connect(OT_apiKey, OT_token);
     $("input#publishLink").click(startPublishing);
