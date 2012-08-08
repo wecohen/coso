@@ -2,22 +2,29 @@
 {% block content %}
 <div class="all">
 	<div id="top">
-		<div id="browser">
-			<a href="" id="back" class="button">&larr;</a>
-			<a href="" id="forward" class="button">&rarr;</a>
-			<input type="url" id="destination_url" size="80%" value="http://"></input>
-			<a href="" id="navigate" class="button">Go</a>
-
-			<iframe id="main_frame" src="http://localhost:5000/test1">
-			</iframe>
+		<div id="logo">
+			<h1>COSO</h1>
 		</div>
+		<div id="navigation">
+			<a href="" id="back" class="button smallbutton">&larr;</a>
+			<a href="" id="forward" class="button smallbutton">&rarr;</a>
+			<input type="url" id="destination_url" size="85%" value="http://"></input>
+			<a href="" id="navigate" class="button smallbutton">Go</a>
+		</div>
+		<div id="topright">
+			vid indicator
+		</div>
+	</div>
+	<div id="browser">
+		<iframe id="main_frame" src="http://localhost:5000/test1">
+		</iframe>
+	</div>
+	<div id="bottom">
 		<div id="myvid">
 			<div id="user_video">
 				<p>Your video is loading...</p>
 			</div>
 		</div>
-	</div>
-	<div id="bottom">
 		<div id="feeds">
 		Share this page with friends to see them here!</br>
 		</div>
