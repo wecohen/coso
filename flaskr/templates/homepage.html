@@ -1,40 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-<script type=text/javascript>
-  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-</script>
-	<div id = "all">
-		<div id = "main">
-			<div class = "row">
-				<div id = "welcome">
-							<p> Welcome to Coso<p> 
-				</div>				
-						<div class = "row">
-							<h5> hang out with your friends, no matter where they are in the world. 
-							</h5>
+        <div id="head">
+            <h1>COSO</h1>
+            <div id="social">
+                <a href="">Twitter</a>
+                <a href="">Facebook</a>
+                <a href="">Stumbleupon</a>
+            </div>
+        </div>
 
-						</div>			
-			</div>
-			<div class = "row"></div>			
-					<div class = "row">
-						<div class = "twelve columns">
-							<div class = "row">
-								<div class = "five columns panel">
-										<a href="{{url_for("create_session")}}" class = "button">Start a new session</a>
-								</div>	
+        <div id="main">
+            <div class="panel">
+                <div id="left">
+                    <h2>Start the party</h2>
+                    <a href="" class="button">Host</a>
+                </div>
+                <div id="right">
+                    <h2>Join</h2>
+                    <input type="text"></input>
+                    <a href="" class="button">Attend</a>
+                </div>
+            </div>
+        </div>
 
-									<!-- <input type = "button" value = "Start a new session" id = "connectLink" action = "{{url_for('create_session')}}" /> -->
-								<div class = "five columns panel">
-										<form action = "{{url_for('join_session')}}" method="get">
-											<input type = "text" value = "" id = "session_id" />
-											<input type = "submit" value = "join existing session"/>
-										</form>
-								</div>
-							</div>			
-						</div>		
-					</div>
-		</div>
-	</div>
-
+        <div id="foot">
+            <div>
+                <h1>About</h1>
+            </div>
+        </div>
 {% endblock %}
-
+   
