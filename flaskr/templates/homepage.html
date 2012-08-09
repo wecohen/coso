@@ -1,41 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
+<div id="all">
+    <div id="head">
+        <h1>COSO</h1>
+        <div id="social">
+            <a href="">Twitter</a>
+            <a href="">Facebook</a>
+            <a href="">Stumbleupon</a>
+        </div>
+    </div>
 
-        <div id="head">
-            <h1>COSO</h1>
-            <div id="social">
-                <a href="">Twitter</a>
-                <a href="">Facebook</a>
-                <a href="">Stumbleupon</a>
+    <div id="main">
+       <img src = "http://pixitr.com/files/funzug/imgs/wildlife/soda_can_puppies_01.jpg" width = "100%" height = "100%" />
+        <div class="panel" id = "party">
+            <div id="left">
+                <h2>Start the party</h2>
+                <a href="{{url_for("create_session")}}" class = "button">Host</a>
+            </div>
+            <div id="right">
+                <h2>Join a party</h2>
+                <!-- <input type="text" id = "session_id"></input> -->
+                <!-- <a href="" class="button" id = "">Attend</a> -->
+                    <form action = "{{url_for('join_session')}}" method="get">
+                        <input type = "text" value = "" id = "session_id" /> <br>
+                        <input type = "submit" class = "button" value = "Attend"/>
+                     </form>
             </div>
         </div>
-
-        <div id="main">
-           <!--  <img src = "http://im.glogster.com/media/4/30/83/6/30830622.jpg" width = "100%" height = "100%" /> -->
-            <div class="panel">
-                <div id="left">
-                    <h2>Start the party</h2>
-                    <a href="{{url_for("create_session")}}" class = "button">Host</a>
-                </div>
-                <div id="right">
-                    <h2>Join</h2>
-                    <!-- <input type="text" id = "session_id"></input> -->
-                    <a href="" class="button" id = "">Attend</a>
-                        <form action = "{{url_for('join_session')}}" method="get">
-                            <input type = "text" value = "" id = "session_id" />
-                            <input type = "submit" value = "Attend"/>
-                         </form>
-                </div>
-            </div>
+        <div class = "panel" id = "foot">
+            <h3 id = "about">What is this exactly?</h1>
+            <p id= "about_text"> Missing your friends and family? Wish you could still do all the things you used to do when you were all in one place? Coso provides a place for people to hangout out together and continue doing all the things they love doing together, by videochatting and browser sharing on one screen. </p>
         </div>
-
-        <div id = "foot">
-            <div id="about_closed">
-                    <h1 id = "about">About</h1>
-                   <div id = "about_opened"> 
-                        <p id= "about_text"> Missing your friends and family? Wish you could still do all the things you used to do when you were all in one place? Coso provides a place for people to hangout out together and continue doing all the things they love doing together. </p>
-                    </div>
-            </div>
-        </div>
+    </div>
+</div>
 {% endblock %}
    

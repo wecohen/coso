@@ -58,7 +58,7 @@ div#topright {
 	float: left;
 }
 div#head {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     height: 45px;
     position: relative;
     background-color: #0096A2;
@@ -76,13 +76,15 @@ div#head h1 {
 div#main {
     /*border: 1px solid blue;*/
     position: relative;
-    background-color: #5AC7A7;
-    min-height: 78%;
-    opacity: .8;
+    
+}
+div#all {
+	height: 100%;
+	background-color: #5AC7A7;
+	opacity: .8;
 }
 
-
-div#foot {
+/*div#foot {
 	background-color: #E3E1DC;
 	padding: 5px;
 	margin: 0px;
@@ -92,42 +94,38 @@ div#foot {
 
     /*border: 1px solid green;*/
 
-}
-
-div#foot#about_opened{
-	padding: 5px;
-	margin: 0px;
-	border: 1px solid gray;
-	background-color: #E3E1DC;
-	min-height: 150px;
-	
-
-}
-
-div#about_opened #about_closed p{
-	display: none;
-	color: red;
+/*}*/
+div#main #foot {
+	/*border: 1px solid red;*/
 	position: absolute;
-	border: 1px solid gray;
-	text-align: left;
-	height: 300px;
-
-
+	top: 325px;
+	width: 50%;
+	margin: 20px 25%;
+	padding: 0 15px;
 }
-
-
-
-div.panel {
+div#main #foot h3 {
+	text-align: center;
+}
+div#main #foot p {
+	text-align: justify;
+}
+div.panel{
     background: #E3E1DC;
-    width: 600px; 
+    
+    /*border: 1px solid #bbb;*/
+    border-radius: 10px;
+    opacity: 0.8;
+    -moz-opacity: 0.8;
+    filter:alpha(opacity=8);
+}
+div.panel#party{
+	width: 600px; 
     margin-left: -300px;
     position: absolute;
     left: 50%;
     top: 60px;
-    /*border: 1px solid #bbb;*/
-    border-radius: 10px;
-   
 }
+
 
 div#left {
     text-align: center;
@@ -142,6 +140,7 @@ div#left {
 
 div#left h2{
 	padding-bottom: 15px;
+	margin-bottom: 25px;
 }
 
 div#right {
@@ -157,7 +156,7 @@ div#right {
 
 div#right h2{
 	padding-bottom: 0px;
-	margin-bottom: 0px;
+	margin-bottom: 5px;
 }
 
 input#session_id {

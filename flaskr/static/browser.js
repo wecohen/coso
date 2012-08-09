@@ -77,7 +77,7 @@ var main = function() {
     $("a#forward").click(forward);
     $("iframe#main_frame").load(url_change_listener);
 
-    _target_frame = $("iframe")[0].contentWindow;
+    // _target_frame = $("iframe")[0].contentWindow;
     window.onmessage = message_listener;
 };
 
