@@ -12,13 +12,14 @@ div#browser {
 }
 div#myvid {
 	float: left;
-	height: 220px;
-	border: 2px solid yellow;
+	height: 100%;
+	/*border: 2px solid yellow;*/
 }
 div#feeds {
 	float: left;
-	height: 220px;
-	border: 2px solid purple;
+	height: 100%;
+	max-width: 90%;
+	/*border: 2px solid purple;*/
 }
 iframe#main_frame {
 	width: 100%;
@@ -36,7 +37,7 @@ div#bottom {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	border: 2px solid green;
+	/*border: 2px solid green;*/
 }
 div#top {
 	height: 30px;
@@ -85,18 +86,6 @@ div#all {
 	background-color: #5AC7A7;
 	opacity: .8;
 }
-
-/*div#foot {
-	background-color: #E3E1DC;
-	padding: 5px;
-	margin: 0px;
-	border: 0px;
-	min-height: 150px;
-	
-
-    /*border: 1px solid green;*/
-
-/*}*/
 div#main #foot {
 	/*border: 1px solid red;*/
 	position: absolute;

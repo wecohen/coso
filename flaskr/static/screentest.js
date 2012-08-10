@@ -1,15 +1,20 @@
-var switchUnpublish = function() {
-	$("#unpublishLink").toggle();
-	$("#publishLink").toggle();
+var showUnpublish = function() {
+	$("#publishLink").hide();
+	$("#unpublishLink").show();
+};
+
+var showPublish = function() {
+	$("#unpublishLink").hide();
+	$("#publishLink").show();
 };
 
 var main = function() {
 	$("#unpublishLink").hide();
 	$("#publishLink").click(function(){
-		switchUnpublish()
+		showUnpublish()
 	});
 	$("#unpublishLink").click(function(){
-		switchUnpublish()
+		showPublish()
 	});
 };
 
