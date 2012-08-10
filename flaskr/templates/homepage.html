@@ -21,8 +21,8 @@
                 <h2>Join a party</h2>
                 <!-- <input type="text" id = "session_id"></input> -->
                 <!-- <a href="" class="button" id = "">Attend</a> -->
-                    <form action = "{{url_for('join_session')}}" method="get">
-                        <input type = "text" value = "" id = "session_id" /> <br>
+                    <form action = "{{url_for('join_session')}}" method= "POST">
+                        <input type = "text" value = "" id = "session_id" name = "session_id" /> <br>
                         <input type = "submit" class = "button" value = "Attend"/>
                      </form>
             </div>

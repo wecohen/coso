@@ -44,9 +44,11 @@ def create_session():
 	# return jsonify(session_id = session_id, unique_token = unique_token)
 	return render_template("screentest.html", session_id=session_id, unique_token=unique_token)	
 
-@app.route("/join", methods = "GET")
+@app.route("/join", methods = ["POST"])
 def join_session():
-	session_id = request.form("session_id")
+	print request.form
+	session_id = request.form.get("session_id")
+	print session_id
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
 	return render_template("screentest.html", session_id = session_id)
 
