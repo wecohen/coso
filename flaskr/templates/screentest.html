@@ -22,19 +22,17 @@
 	<div id="bottom">
 		<div id="myvid">
 			<div id="user_video">
-				<p>Your video is loading...</p>
 			</div>
-			<input type = "button" value = "Vid chat!" id="publishLink"  />
-				<input type = "button" value = "Peace Out" id="unpublishLink"  />
-				<p > Your session is: {{session_id}} </p>
-				<script>
-				var sessionId = {{session_id}}
-				var uniqueToken = {{unique_token}}
-				</script>
+			<input type = "button" class="button smallbutton" value = "Video On" id="publishLink"/>
+			<input type = "button" class="button smallbutton" value = "Peace Out" id="unpublishLink"/>
 		</div>
 		<div id="feeds">
-		Share this page with friends to see them here!</br>
+			Share with friends to see them here! Session: {{session_id}}
 		</div>
+		<script>
+		var sessionId = {{session_id}}
+		var uniqueToken = {{unique_token}}
+		</script>
 	</div>
 </div>
 {% endblock %}

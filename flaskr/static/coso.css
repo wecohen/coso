@@ -7,16 +7,18 @@ div#browser {
 	top: 30px;
 	left: 0;
 	right: 0;
-	bottom: 150px;
+	bottom: 220px;
 	/*border: 2px solid purple;*/
 }
 div#myvid {
 	float: left;
-	/*border: 2px solid yellow;*/
+	height: 220px;
+	border: 2px solid yellow;
 }
 div#feeds {
 	float: left;
-	/*border: 2px solid purple;*/
+	height: 220px;
+	border: 2px solid purple;
 }
 iframe#main_frame {
 	width: 100%;
@@ -30,11 +32,11 @@ input#destination_url {
 	margin-left: -2px;
 }
 div#bottom {
-	height: 150px;
+	height: 220px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	/*border: 2px solid green;*/
+	border: 2px solid green;
 }
 div#top {
 	height: 30px;

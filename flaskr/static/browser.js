@@ -1,11 +1,16 @@
-// screen/browser sharing js
+// browser sharing js
+var browser_id = Math.random();
 
 var pusher = new Pusher('b31d655fa7f11bd6f11d');
 var channel = pusher.subscribe('channel_name');
 channel.bind('URL_change', function(data) {
-	if ("iframe#main_frame".attr("src") != data['url']){
+	if (browser_id != data[leader_id]){
+		console.log("This needs to be changed");
     	$("iframe#main_frame").attr("src", data['url']);
     	}
+    else {
+    	console.log("This does not need to be changed");
+   		}
     $("input#destination_url").attr("value", data['url']);
 });
 channel.bind('click', function(data) {
@@ -36,7 +41,8 @@ function back() {
 }
 function forward() {
 	var next = history.go(1);
-	$.get("http://localhost:5000/navigate", {"destination_url" : next});
+	navigate(next);
+	// $.get("http://localhost:5000/navigate", {"destination_url" : next});
 	return false;
 }
 
@@ -56,10 +62,11 @@ var message_listener = function(event) {
 			return false;
         }
         else if (event.data.type == "location") {
+        	console.log("location changed")
         	var new_url = event.data.val;
-            $("input#destination_url").val(new_url);
-   //          $.get("http://localhost:5000/navigate", {"destination_url" : new_url});
-			// return false;
+        	var leader_id = browser_id;
+            $.get("http://localhost:5000/navigate", {"destination_url" : new_url, "leader_id" : leader_id});
+			return false;
         }
 //    }
 };
@@ -77,7 +84,7 @@ var main = function() {
     $("a#forward").click(forward);
     $("iframe#main_frame").load(url_change_listener);
 
-    // _target_frame = $("iframe")[0].contentWindow;
+    _target_frame = $("iframe")[0].contentWindow;
     window.onmessage = message_listener;
 };
 
