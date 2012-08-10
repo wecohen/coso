@@ -1,5 +1,7 @@
 // videochat js
 var publisher;
+var OT_sessionID = $("session_id")
+var session = TB.initSession(OT_sessionID);
 
 TB.setLogLevel(TB.DEBUG);
 
@@ -35,7 +37,7 @@ function startPublishing() {
 //link to "stop session" button in html
 function stopPublishing() {
     if (publisher) {
-        sesion.unpublish(publisher);
+        session.unpublish(publisher);
     }
     publisher = null;
     $(this).fadeOut();
