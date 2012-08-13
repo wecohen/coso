@@ -55,7 +55,8 @@ def join_session():
 @app.route("/navigate")
 def navigate():
     dest_url = request.args['destination_url']
-    g.pusher['channel_name'].trigger("URL_change", {"url": dest_url})
+    leader_id = request.args['leader_id']
+    g.pusher['channel_name'].trigger("URL_change", {"url": dest_url, "leader_id": leader_id})
     return ""
 
 @app.route("/click")
