@@ -60,6 +60,9 @@ div#topright {
 	width: 15%;
 	float: left;
 }
+span#session_id{
+	font-size: 8px;
+}
 div#head {
     /*border: 1px solid red;*/
     height: 45px;
@@ -67,9 +70,10 @@ div#head {
     background-color: #0096A2;
 }
 div#social {
-    position: absolute;
-    right: 0px;
-    top: 0px;
+	position: absolute;  
+	right: 0px;
+	top: 5px;
+
 }
 
 div#head h1 {

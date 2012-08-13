@@ -12,7 +12,10 @@
 			<a href="" id="navigate" class="button smallbutton">Go</a>
 		</div>
 		<div id="topright">
-			vid indicator
+			Invite Friends!
+			<p id = "invite_text"> Send this session id code to your friends to have them join
+				your party! Your session id is: <br>
+				<span id = "session_id">{{session_id}}</span></p>
 		</div>
 	</div>
 	<div id="browser">
@@ -27,8 +30,8 @@
 			<input type = "button" class="button smallbutton" value = "Peace Out" id="unpublishLink"/>
 		</div>
 		<div id="feeds">
-			Share with friends to see them here! Session: {{session_id}}
-		</div>
+			<!-- Share with friends to see them here! Session: {{session_id}}
+		</div> -->
 		<script>
 		var sessionId = {{session_id}}
 		var uniqueToken = {{unique_token}}

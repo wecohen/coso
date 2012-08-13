@@ -4,12 +4,12 @@
     <div id="head">
         <h1>COSO</h1>
         <div id="social">
-            <a href="">Twitter</a>
-            <a href="">Facebook</a>
-            <a href="">Stumbleupon</a>
+            <span class='st_twitter_large' displayText='Tweet'></span>
+            <span class='st_facebook_large' displayText='Facebook'></span>
+            <span class='st_fblike_large' displayText='Facebook Like'></span>
         </div>
+        
     </div>
-
     <div id="main">
        <img src = "http://pixitr.com/files/funzug/imgs/wildlife/soda_can_puppies_01.jpg" width = "100%" height = "100%" />
         <div class="panel" id = "party">
@@ -19,8 +19,6 @@
             </div>
             <div id="right">
                 <h2>Join a party</h2>
-                <!-- <input type="text" id = "session_id"></input> -->
-                <!-- <a href="" class="button" id = "">Attend</a> -->
                     <form action = "{{url_for('join_session')}}" method= "POST">
                         <input type = "text" value = "" id = "session_id" name = "session_id" /> <br>
                         <input type = "submit" class = "button" value = "Attend"/>
