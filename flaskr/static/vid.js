@@ -21,14 +21,18 @@ function sessionDisconnect() {
 
 //link to "start a vid chat sesh" in html
 function startPublishing() {
+    // alert("Start publishing");
     if(!publisher) {
         var $parentDiv = $("#user_video", {width: 120, height: 90}).get();
         var $publisherDiv = $('<div/>');
         $publisherDiv.attr('id', 'opentok_publisher');
         $("#user_video").append($publisherDiv);
+        // alert("1");
         publisher = TB.initPublisher(OT_apiKey, $publisherDiv.attr("id"));
+        // alert("2");
         session.publish(publisher);
-        $(this).fadeOut();
+        //$(this).fadeOut();
+        // alert("vid.js");
         // show('unpublishLink');
         // hide('publishLink');
     }
@@ -40,7 +44,7 @@ function stopPublishing() {
         session.unpublish(publisher);
     }
     publisher = null;
-    $(this).fadeOut();
+    // $(this).fadeOut();
 
     // show('publishLink');
     // hide('unpublishLink');
@@ -92,8 +96,9 @@ var main = function() {
     // $("#connectLink").click(sessionConnect);
     // $("input#disconnectLink").click(sessionDisconnect);
     // session.connect(OT_apiKey, OT_token);
-    $("input#publishLink").click(startPublishing);
+    
     $("input#unpublishLink").click(stopPublishing);
+    $("input#publishLink").click(startPublishing);
     
 };
 

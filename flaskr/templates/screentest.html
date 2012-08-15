@@ -2,21 +2,23 @@
 {% block content %}
 <div class="all">
 	<div id="top">
-		<div id="logo">
-			<h1>COSO</h1>
-		</div>
-		<div id="navigation">
-			<a href="" id="back" class="button smallbutton">&larr;</a>
-			<a href="" id="forward" class="button smallbutton">&rarr;</a>
-			<input type="url" id="destination_url" size="85%" value="http://"></input>
-			<a href="" id="navigate" class="button smallbutton">Go</a>
-		</div>
-		<div id="topright">
-			Invite Friends!
-			<p id = "invite_text"> Send this session id code to your friends to have them join
-				your party! Your session id is: <br>
-				<span id = "session_id">{{session_id}}</span></p>
-		</div>
+		<div id = "top_three">
+			<div id="logo">
+				<h1>COSO</h1>
+			</div>
+			<div id="navigation">
+				<a href="" id="back" class="button smallbutton">&larr;</a>
+				<a href="" id="forward" class="button smallbutton">&rarr;</a>
+				<input type="url" id="destination_url" size="85%" value="http://"></input>
+				<a href="" id="navigate" class="button smallbutton">Go</a>
+			</div>
+			<div id="topright">
+				Invite Friends!
+			</div>
+		</div>		
+		<div id = "invite">
+			<p id = "invite_text"> Your session id is: {{session_id}}</p>
+		</div>		
 	</div>
 	<div id="browser">
 		<iframe id="main_frame" src="http://localhost:5000/test1">
@@ -33,8 +35,8 @@
 			<!-- Share with friends to see them here! Session: {{session_id}}
 		</div> -->
 		<script>
-		var sessionId = {{session_id}}
-		var uniqueToken = {{unique_token}}
+		var sessionId = "{{session_id}}"
+		var uniqueToken = "{{unique_token}}"
 		</script>
 	</div>
 </div>

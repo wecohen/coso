@@ -1,7 +1,13 @@
+var showInvite = function() {
+	alert("showinvite");
+	$("#invite_text").slideToggle(200);
+}
+
 var showUnpublish = function() {
 	$("#publishLink").hide();
 	$("#unpublishLink").show();
-};
+	// alert("Screentest.js");
+};	
 
 var showPublish = function() {
 	$("#unpublishLink").hide();
@@ -10,12 +16,13 @@ var showPublish = function() {
 
 var main = function() {
 	$("#unpublishLink").hide();
-	$("#publishLink").click(function(){
-		showUnpublish()
-	});
+	$("#publishLink").click(showUnpublish);
 	$("#unpublishLink").click(function(){
 		showPublish()
 	});
+	$("#invite_text").hide();
+	$("#topright").click(showInvite);
+	
 };
 
 $(document).ready(main);
