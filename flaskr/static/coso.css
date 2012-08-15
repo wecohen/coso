@@ -42,20 +42,20 @@ div#bottom {
 div#top {
 
 	height: 60px;
-	border: 2px solid yellow;
+	/*border: 2px solid yellow;*/
 
 }
 
 div#top_three{
 	height: 30px;
 	width: 100%;
-	border: 1px solid green;
+	border: 1px solid white;
 	/*float: left;*/
 }
 div#invite{
 	height: 30px;
 	width: 100%;
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 }
 
 p#invite_text{
