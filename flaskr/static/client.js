@@ -2,7 +2,24 @@ var __my_parent_win = null;
 var __origin = null;
 
 var apply_event = function(e) {
-	alert("Need to implement this");
+	if (e.data.type == "click") {
+		event = document.createEvent("HTMLEvents");
+		event.initEvent("click", true, true);
+		document.elementFromPoint(e.data.x, e.data.y).dispatchEvent(event);
+		document.elementFromPoint(e.data.x, e.data.y).focus();
+	}
+	if (e.data.type == "scroll") {
+		window.scrollTo(e.data.offset_x, e.data.offset_y);
+	}
+	if (e.data.type == "key") {
+		press_key(e.data.code);
+	}
+};
+
+function press_key(char) {
+	var textevent = document.createEvent("TextEvent");
+	textevent.initTextEvent("textInput", true, true, null, char, 9, "en-US");
+	document.activeElement.dispatchEvent(textevent);
 };
 
 var install_message_listener = function(e) {
@@ -11,7 +28,8 @@ var install_message_listener = function(e) {
 	var win = e.source;
 	if (__origin === "http://localhost:5000") {
 		__my_parent_win = win;
-		__my_parent_win.postMessage({"type": "location", "val": window.location.href}, "*");
+		__my_parent_win.postMessage({"type": "location", 
+			"val": window.location.href}, "*");
 		window.onmessage = apply_event;
 	};
 };
@@ -29,12 +47,28 @@ var event_wrapper = function(fn1, fn2) {
 
 var our_click_handler = function(event) {
     if (__my_parent_win !== null) {
-        __my_parent_win.postMessage({"type": "click", "target": [event.pageX, event.pageY]}, "*");
+        __my_parent_win.postMessage({"type": "click", 
+        	"target": [event.pageX, event.pageY]}, "*");
+    }
+};
+
+var our_scroll_handler = function(event) {
+	if (__my_parent_win !== null) {
+        __my_parent_win.postMessage({"type": "scroll", 
+        	"offset": [window.pageXOffset, window.pageYOffset]}, "*");
+    }
+};
+
+var our_key_handler = function(event) {
+    if (__my_parent_win !== null) {
+        __my_parent_win.postMessage({"type": "key", "code": event.charCode}, "*");
     }
 };
 
 var install_coso = function() {
 	document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
+	window.onscroll = event_wrapper(window.onscroll, our_scroll_handler);
+	document.body.onkeyup = event_wrapper(document.body.onkeyup, our_key_handler);
 };
 
 setTimeout("install_coso();", 100);

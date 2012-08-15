@@ -1,7 +1,8 @@
 // browser sharing js
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
-var pushing = false; // value to indicate when content loads were results of pushes
+var pushing = false; // value to indicate when content changes were results of pushes
+var click_execution = null; // refer to timeout on receipt of click message from iframe
 
 var pusher = new Pusher('b31d655fa7f11bd6f11d'); // set up new session
 var channel = pusher.subscribe('channel_name'); // subscribe to this session
@@ -17,8 +18,22 @@ channel.bind('URL_change', function(data) {
     // for all, since leader may not have changed this already.
 });
 channel.bind('click', function(data) {
-	$(document.elementFromPoint(data['x'], data['y'])).click();
-    $("input#destination_url").attr("value", data['']); //COME UP WITH HOW TO GET CURRENT URL
+    if (browser_id != data["leader_id"]){
+        pushing = true;
+        _target_frame.postMessage({"type": "click", "x": data['x'], "y": data['y']}, "*");
+    }
+});
+channel.bind('scroll', function(data) {
+    if (browser_id != data["leader_id"]){
+        pushing = true;
+        _target_frame.postMessage({"type": "scroll", "offset_x": data['offset_x'], "offset_y": data['offset_y']}, "*");
+    }
+});
+channel.bind('key', function(data) {
+    if (browser_id != data["leader_id"]){
+        pushing = true;
+        _target_frame.postMessage({"type": "key", "code": data['code']}, "*");
+    }
 });
 
 function navigate(url) {
@@ -62,13 +77,21 @@ var message_listener = function(event) {
     // if statement is security precaution to make sure messages are coming from child iframe.
         if (event.data.type == "click") {
             // user clicked in the iframe
-        	console.log("It was a click at " + event.data.target[0] + " " + event.data.target[1]);
-			$.get("http://localhost:5000/click", 
-				{"x": event.data.target[0], "y": event.data.target[1]});
-			return false;
+            var leader_id = browser_id; // adding an identifier that this iframe originated event
+    		if (pushing == false) {
+                click_execution = setTimeout(function() {
+                	$.get("http://localhost:5000/click", 
+        				{"x": event.data.target[0], "y": event.data.target[1], "leader_id" : leader_id});
+                }, 500); // push click event to rest of session after 500 milliseconds
+			}
+            else if (pushing == true) {
+                pushing = false;
+            }
+            return false;
         }
         else if (event.data.type == "location") {
         	// iframe loaded new page
+            clearTimeout(click_execution); // cancel click event from pushing if there was one
         	var new_url = event.data.val; // message from iframe includes new url
         	var leader_id = browser_id; // adding an identifier that this iframe originated event
         	if (pushing == false) {
@@ -81,28 +104,46 @@ var message_listener = function(event) {
             }
 			return false;
         }
+        else if (event.data.type == "scroll") {
+            var leader_id = browser_id; // adding an identifier that this iframe originated event
+            if (pushing == false) {
+                $.get("http://localhost:5000/scroll", {"offset_x" : event.data.offset[0],
+                 "offset_y" : event.data.offset[1], "leader_id" : leader_id});
+            }
+            else if (pushing == true) {
+                pushing = false;
+            }
+            return false;
+        }
+        else if (event.data.type == "key") {
+            var leader_id = browser_id; // adding an identifier that this iframe originated event
+            if (pushing == false) {
+                $.get("http://localhost:5000/key", {"code": event.data.code, "leader_id": leader_id});
+            }
+            else if (pushing == true) {
+                pushing = false;
+            }
+            return false;
+        }
 //    }
 };
 
 var _target_frame = null;
 // creating variable to be assigned to child iframe to facilitate communication
 
-var url_change_listener = function() {
-    connect_target();
-};
+function connect_target() {
+    // setting up connection with iframe (client.js) when it loads
+    _target_frame.postMessage("Connect", "*");
+}
 
 var main = function() {
 	$("input#destination_url").keyup(url_enter);
     $("a#navigate").click(navigate_request);
     $("a#back").click(back);
     $("a#forward").click(forward);
-    $("iframe#main_frame").load(url_change_listener);
+    $("iframe#main_frame").load(connect_target);
     _target_frame = $("iframe")[0].contentWindow;
     window.onmessage = message_listener;
 };
 
-function connect_target() {
-    _target_frame.postMessage("Connect", "*");
-    console.log("Parent to child");
-}
 $(document).ready(main);

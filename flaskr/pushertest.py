@@ -62,7 +62,22 @@ def navigate():
 @app.route("/click")
 def click():
 	x, y = request.args['x'], request.args['y']
-	g.pusher['channel_name'].trigger("click", {"x": x, "y": y})
+	leader_id = request.args['leader_id']
+	g.pusher['channel_name'].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
+	return ""
+
+@app.route("/scroll")
+def scroll():
+	offset_x, offset_y = request.args['offset_x'], request.args['offset_y']
+	leader_id = request.args['leader_id']
+	g.pusher['channel_name'].trigger("scroll", {"offset_x": offset_x, "offset_y": offset_y, "leader_id": leader_id})
+	return ""
+
+@app.route("/key")
+def key():
+	code = request.args['code']
+	leader_id = request.args['leader_id']
+	g.pusher['channel_name'].trigger("key", {"code": code, "leader_id": leader_id})
 	return ""
 
 @app.route ("/test1")
