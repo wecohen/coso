@@ -118,6 +118,7 @@ var message_listener = function(event) {
         else if (event.data.type == "key") {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
             if (pushing == false) {
+                console.log(event.data.code)
                 $.get("http://localhost:5000/key", {"code": event.data.code, "leader_id": leader_id});
             }
             else if (pushing == true) {

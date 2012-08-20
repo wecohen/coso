@@ -12,14 +12,13 @@ var apply_event = function(e) {
 		window.scrollTo(e.data.offset_x, e.data.offset_y);
 	}
 	if (e.data.type == "key") {
-		press_key(e.data.code);
+		fill_key(e.data.code);
 	}
 };
 
-function press_key(char) {
-	var textevent = document.createEvent("TextEvent");
-	textevent.initTextEvent("textInput", true, true, null, char, 9, "en-US");
-	document.activeElement.dispatchEvent(textevent);
+function fill_key(contents) {
+	console.log(contents);
+	document.activeElement.value = contents;
 };
 
 var install_message_listener = function(e) {
@@ -60,8 +59,10 @@ var our_scroll_handler = function(event) {
 };
 
 var our_key_handler = function(event) {
+   	console.log(event);
+
     if (__my_parent_win !== null) {
-        __my_parent_win.postMessage({"type": "key", "code": event.charCode}, "*");
+        __my_parent_win.postMessage({"type": "key", "code": document.activeElement.value}, "*");
     }
 };
 
