@@ -1,1 +1,1 @@
-web: python pushertest.py
+web: python flaskr/pushertest.py
