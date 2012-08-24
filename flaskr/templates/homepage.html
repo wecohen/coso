@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% block javascript %}
+<script type= "text/javascript" src= "static/home.js"></script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript"> stLight.options({publisher: "ur-a8f06c21-be42-adf9-fef6-56f79368af98"}); 
+</script>
+{% endblock %}
+
 {% block content %}
 <div id="all">
     <div id="head">
@@ -19,7 +26,7 @@
             </div>
             <div id="right">
                 <h2>Join a party</h2>
-                    <form action = "{{url_for('join_session')}}" method= "POST">
+                    <form action = "{{url_for('join_session')}}" method= "GET">
                         <input type = "text" value = "" id = "session_id" name = "session_id" /> <br>
                         <input type = "submit" class = "button" value = "Attend"/>
                      </form>

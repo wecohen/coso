@@ -1,40 +1,28 @@
 // videochat js
 var publisher;
-var OT_sessionID = $("session_id")
-var session = TB.initSession(OT_sessionID);
-
-TB.setLogLevel(TB.DEBUG);
+var session = null;
+var subscribers = {};
 
 function sessionConnect(){
-    session.connect(OT_apiKey, $("unique_token"));
     //link to a connect button in the html
 }
 
 function sessionDisconnect() {
             session.disconnect();
             $(this).fadeOut();
-            // hide('disconnectLink');
-            // hide('publishLink');
-            // hide('unpublishLink');
         }
         //link to disconnect button in html
 
 //link to "start a vid chat sesh" in html
 function startPublishing() {
-    // alert("Start publishing");
     if(!publisher) {
-        var $parentDiv = $("#user_video", {width: 120, height: 90}).get();
+        var $parentDiv = $("#user_video").get();
         var $publisherDiv = $('<div/>');
         $publisherDiv.attr('id', 'opentok_publisher');
         $("#user_video").append($publisherDiv);
-        // alert("1");
-        publisher = TB.initPublisher(OT_apiKey, $publisherDiv.attr("id"));
-        // alert("2");
+        publisher = TB.initPublisher(OT_apiKey, $publisherDiv.attr("id"), {width: 160, height: 120});
         session.publish(publisher);
-        //$(this).fadeOut();
-        // alert("vid.js");
-        // show('unpublishLink');
-        // hide('publishLink');
+
     }
 }
 
@@ -44,34 +32,26 @@ function stopPublishing() {
         session.unpublish(publisher);
     }
     publisher = null;
-    // $(this).fadeOut();
 
-    // show('publishLink');
-    // hide('unpublishLink');
 }
 
 function sessionConnectHandler(event) {
-    //session.publish("user_video", {width: 120, height: 90}); 
     for(var i = 0; i < event.streams.length; i++) {
         addStream(event.streams[i]);
-        }
-        // show('disconnectLink');
-        // show('publishLink');
-        // hide('connectLink');
-    	// target_stream = event.streams[i]
-    	// if (session.connection.connectionId != target_stream.connection.connectionId) {
-    	// 	subscribeToStream(event.streams[i]);
-    	// 	}
-    	}
+    }
+       
+}
         
 	
 
 function streamCreatedHandler(event) {
 	for(var i = 0; i < event.streams.length; i++) {
-    	//target_stream = event.streams[i];
         addStream(event.streams[i]);
-    	}
-	}
+    }
+}
+
+function streamDestroyedHandler(event) {
+}
 
 function addStream(stream) {
     if (stream.connection.connectionId == session.connection.connectionId) {
@@ -79,10 +59,10 @@ function addStream(stream) {
     }
     var $subscriberDiv = $("<div/>");
     $subscriberDiv.attr("id", stream.streamId);
-    $subscriberDiv.get("#feeds");
-    $subscriberDiv.append("#feeds");
-    subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id);
+    $("div#feeds").append($subscriberDiv);
+    subscribers[stream.streamId] = session.subscribe(stream, stream.streamId, {width: 160, height: 120});
 }
+
 function subscribeToStream(stream) {
     var $div = $('<div/>');
     $("#feeds").append($div);
@@ -93,10 +73,12 @@ function subscribeToStream(stream) {
 
 
 var main = function() {
-    // $("#connectLink").click(sessionConnect);
-    // $("input#disconnectLink").click(sessionDisconnect);
-    // session.connect(OT_apiKey, OT_token);
-    
+    session = TB.initSession(sessionId);
+    session.connect(OT_apiKey, uniqueToken);
+
+    session.addEventListener("streamCreated", streamCreatedHandler);
+    // session.addEventListener("streamDestroyed", streamDestroyedHandler);
+    session.addEventListener("sessionConnected", sessionConnectHandler);
     $("input#unpublishLink").click(stopPublishing);
     $("input#publishLink").click(startPublishing);
     
@@ -104,15 +86,4 @@ var main = function() {
 
 $(document).ready(main);
 
-// }
-// helper functions
 
-
-    // function show(id) {
-            
-    //         document.getElementById(id).style.display = 'block';
-    //     }
-
-    //     function hide(id) {
-    //         document.getElementById(id).style.display = 'none';
-    //     }

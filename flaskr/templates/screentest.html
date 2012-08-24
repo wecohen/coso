@@ -1,7 +1,21 @@
 {% extends "base.html" %}
+{% block javascript %}
+<script type="text/javascript">
+var sessionId = "{{session_id}}";
+var uniqueToken = "{{unique_token}}";
+</script>
+<script src="http://js.pusher.com/1.12/pusher.min.js"></script>
+<!-- <script src="http://static.opentok.com/v0.91/js/TB.min.js"></script> -->
+<script type= "text/javascript" src= "static/screentest.js"></script>
+<script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+<script type="text/javascript" src="static/vid.js"></script>
+<script type="text/javascript" src="static/browser.js"></script>
+
+{% endblock %}
+
 {% block content %}
 <div class="all">
-	<div id="top">
+	<div id="top" class = "" >
 		<div id = "top_three">
 			<div id="logo">
 				<h1>COSO</h1>
@@ -15,12 +29,12 @@
 			<div id="topright">
 				Invite Friends!
 			</div>
-		</div>		
+		</div>
 		<div id = "invite">
 			<p id = "invite_text"> Your session id is: {{session_id}}</p>
-		</div>		
+		</div>
 	</div>
-	<div id="browser">
+	<div id="browser" class="browser_showing">
 		<iframe id="main_frame" src="http://localhost:5000/test1">
 		</iframe>
 	</div>
@@ -34,10 +48,6 @@
 		<div id="feeds">
 			<!-- Share with friends to see them here! Session: {{session_id}}
 		</div> -->
-		<script>
-		var sessionId = "{{session_id}}"
-		var uniqueToken = "{{unique_token}}"
-		</script>
 	</div>
 </div>
 {% endblock %}

@@ -72,6 +72,8 @@ var url_enter = function(event) {
 };
 
 var message_listener = function(event) {
+    console.log("Event from iframe");
+    console.log(event);
     // look for messages sent from iframe (client.js file)
     // if (event.origin === _target_frame.location.origin) {
     // if statement is security precaution to make sure messages are coming from child iframe.

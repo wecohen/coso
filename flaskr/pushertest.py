@@ -44,13 +44,13 @@ def create_session():
 	# return jsonify(session_id = session_id, unique_token = unique_token)
 	return render_template("screentest.html", session_id=session_id, unique_token=unique_token)	
 
-@app.route("/join", methods = ["POST"])
+@app.route("/join", methods = ["GET"])
 def join_session():
 	print request.form
-	session_id = request.form.get("session_id")
+	session_id = request.args.get("session_id")
 	print session_id
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
-	return render_template("screentest.html", session_id = session_id)
+	return render_template("screentest.html", session_id = session_id, unique_token=unique_token)
 
 @app.route("/navigate")
 def navigate():
@@ -61,6 +61,7 @@ def navigate():
 
 @app.route("/click")
 def click():
+	print "click happened"
 	x, y = request.args['x'], request.args['y']
 	leader_id = request.args['leader_id']
 	g.pusher['channel_name'].trigger("click", {"x": x, "y": y, "leader_id": leader_id})

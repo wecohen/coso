@@ -2,14 +2,24 @@ body {
 	font-family: 'Karla', sans-serif;
 	margin: 0px;
 }
+
+div.all.show_invite div#browser {
+	top: 60px;
+	-webkit-transition-property: top;
+	-webkit-transition-duration: 0.25s;
+}
+
 div#browser {
 	position: absolute;
-	top: 60px;
 	left: 0;
 	right: 0;
-	bottom: 220px;
+	bottom: 150px;
+	top: 35px;
+	-webkit-transition-property: top;
+	-webkit-transition-duration: 0.25s;
 	/*border: 2px solid purple;*/
 }
+
 div#myvid {
 	float: left;
 	height: 100%;
@@ -19,7 +29,7 @@ div#feeds {
 	float: left;
 	height: 100%;
 	max-width: 90%;
-	b/*order: 2px solid purple;*/
+	/*border: 2px solid purple;*/
 }
 iframe#main_frame {
 	width: 100%;
@@ -33,29 +43,45 @@ input#destination_url {
 	margin-left: -2px;
 }
 div#bottom {
-	height: 220px;
+	/*height: 150px;*/
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	/*border: 2px solid green;*/
 }
 div#top {
-
-	height: 60px;
 	/*border: 2px solid yellow;*/
+	height: 35px;
+}
 
+div.all.show_invite div#top {
+	height: 60px;
 }
 
 div#top_three{
-	height: 30px;
 	width: 100%;
+	height: 30px;
 	border: 1px solid white;
 	/*float: left;*/
+}
+/*div.top_hiding{
+	height: 30px;
+}*/
+div.top_showing{
+	height: 60px;
 }
 div#invite{
 	height: 30px;
 	width: 100%;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.25s linear 0.25s;
 	/*border: 1px solid red;*/
+}
+
+div.all.show_invite div#invite {
+	visibility: visible;
+	opacity: 1;
 }
 
 p#invite_text{
