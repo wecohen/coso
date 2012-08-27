@@ -1,5 +1,6 @@
 // browser sharing js
-
+console.log("hi");
+console.log(sessionId);
 console.log(session_id);
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
