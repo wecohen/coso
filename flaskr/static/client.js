@@ -17,7 +17,6 @@ var apply_event = function(e) {
 };
 
 function fill_key(contents) {
-	console.log(contents);
 	document.activeElement.value = contents;
 };
 
@@ -45,10 +44,7 @@ var event_wrapper = function(fn1, fn2) {
 };
 
 var our_click_handler = function(event) {
-   	console.log(event);
-   	// alert("Cleeck");
     if (__my_parent_win !== null) {
-
         __my_parent_win.postMessage({"type": "click", 
         	"target": [event.pageX, event.pageY]}, "*");
     }
@@ -62,8 +58,6 @@ var our_scroll_handler = function(event) {
 };
 
 var our_key_handler = function(event) {
-   	console.log(event);
-
     if (__my_parent_win !== null) {
         __my_parent_win.postMessage({"type": "key", "code": document.activeElement.value}, "*");
     }

@@ -7,10 +7,6 @@ var main = function() {
 	$("#about").click(function(){
 		showAbout()
 	});
-
 };
-
-
-
 
 $(document).ready(main);

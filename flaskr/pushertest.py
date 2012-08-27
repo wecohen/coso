@@ -26,30 +26,24 @@ def setup_function():
 	g.OT_apiKey = config.OT_apiKey
 	g.pusher = pusher.Pusher()
 
-
 @app.route ("/")
 def home():
 	return render_template("homepage.html")
 
 def create_session_id():
 	unique_session = opentok_sdk.create_session()
-	print unique_session.session_id
 	return unique_session.session_id
 
 @app.route ("/session")
 def create_session():
-	print "bloop"
 	session_id = create_session_id()
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
-	print "this is my" + unique_token
 	# return jsonify(session_id = session_id, unique_token = unique_token)
 	return render_template("screentest.html", session_id=session_id, unique_token=unique_token)	
 
 @app.route("/join", methods = ["GET"])
 def join_session():
-	print request.form
 	session_id = request.args.get("session_id")
-	print session_id
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
 	return render_template("screentest.html", session_id = session_id, unique_token=unique_token)
 
@@ -62,7 +56,6 @@ def navigate():
 
 @app.route("/click")
 def click():
-	print "click happened"
 	x, y = request.args['x'], request.args['y']
 	leader_id = request.args['leader_id']
 	g.pusher['channel_name'].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
@@ -93,5 +86,3 @@ def test2():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
-

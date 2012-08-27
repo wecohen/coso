@@ -1,5 +1,7 @@
 // browser sharing js
 
+console.log(session_id);
+
 var browser_id = Math.random(); // assigns id to identify each browser in session
 var pushing = false; // value to indicate when content changes were results of pushes
 var click_execution = null; // refer to timeout on receipt of click message from iframe

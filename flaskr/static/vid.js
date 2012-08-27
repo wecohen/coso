@@ -32,17 +32,13 @@ function stopPublishing() {
         session.unpublish(publisher);
     }
     publisher = null;
-
 }
 
 function sessionConnectHandler(event) {
     for(var i = 0; i < event.streams.length; i++) {
         addStream(event.streams[i]);
-    }
-       
+    }  
 }
-        
-	
 
 function streamCreatedHandler(event) {
 	for(var i = 0; i < event.streams.length; i++) {
@@ -70,20 +66,14 @@ function subscribeToStream(stream) {
 	session.subscribe(stream, $div.attr("id"));
 }
 
-
-
 var main = function() {
     session = TB.initSession(sessionId);
     session.connect(OT_apiKey, uniqueToken);
-
     session.addEventListener("streamCreated", streamCreatedHandler);
     // session.addEventListener("streamDestroyed", streamDestroyedHandler);
     session.addEventListener("sessionConnected", sessionConnectHandler);
     $("input#unpublishLink").click(stopPublishing);
     $("input#publishLink").click(startPublishing);
-    
 };
 
 $(document).ready(main);
-
-
