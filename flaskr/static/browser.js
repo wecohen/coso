@@ -1,6 +1,4 @@
 // browser sharing js
-console.log(sessionId);
-console.log("yeah");
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
 var pushing = false; // value to indicate when content changes were results of pushes
@@ -9,7 +7,6 @@ var click_execution = null; // refer to timeout on receipt of click message from
 var pusher = new Pusher(pusherKey); // set up new session
 var channel = pusher.subscribe(sessionId); // subscribe to this session
 channel.bind('URL_change', function(data) {
-    console.log("Pusher URL_change called")
     // pusher pushing to all subscribed to keep iframes at the same place, if
     // statement discludes the browser that originated the push (already updated).
 	if (browser_id != data["leader_id"]){
