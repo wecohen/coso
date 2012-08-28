@@ -44,6 +44,8 @@ var event_wrapper = function(fn1, fn2) {
 };
 
 var our_click_handler = function(event) {
+	elem = document.elementFromPoint(event.pageX, event.pageY);
+	console.log(elem);
     if (__my_parent_win !== null) {
         __my_parent_win.postMessage({"type": "click", 
         	"target": [event.pageX, event.pageY]}, "*");
