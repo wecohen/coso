@@ -1,7 +1,6 @@
 // browser sharing js
 console.log("hi");
 console.log(sessionId);
-console.log(session_id);
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
 var pushing = false; // value to indicate when content changes were results of pushes
@@ -40,12 +39,14 @@ channel.bind('key', function(data) {
 });
 
 function navigate(url) {
+    console.log("browser.js navigate called")
     // change iframe location to url function receives. This should also trigger load event.
 	$("iframe#main_frame").attr("src", url);
 	return false;
 }
 
 function navigate_request() {
+    console.log("browser.js navigate_request called")
     // clean up URL entered by user and call navigate, providing the cleaned URL
     var destination = $("input#destination_url").val();
     if(destination.substring(0, 4) != "http"){

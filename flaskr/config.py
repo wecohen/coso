@@ -1,7 +1,6 @@
 import os
 
-pusher_application_key = 'b31d655fa7f11bd6f11d'
-pusher_app_id = '24605'
+pusher_app_id = '26566'
 pusher_key = os.getenv("pusher_key", "")
 pusher_secret = os.getenv("pusher_secret", "")
 
