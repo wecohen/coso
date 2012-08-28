@@ -48,7 +48,7 @@ def navigate():
 	dest_url = request.args['destination_url']
 	leader_id = request.args['leader_id']
 	session_id = request.args['session_id']
-	g.pusher[sessionId].trigger("URL_change", {"url": dest_url, "leader_id": leader_id})
+	g.pusher[session_id].trigger("URL_change", {"url": dest_url, "leader_id": leader_id})
 	return ""
 
 @app.route("/click")
@@ -56,7 +56,7 @@ def click():
 	x, y = request.args['x'], request.args['y']
 	leader_id = request.args['leader_id']
 	session_id = request.args['session_id']
-	g.pusher[sessionId].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
+	g.pusher[session_id].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
 	return ""
 
 @app.route("/scroll")
@@ -64,7 +64,7 @@ def scroll():
 	offset_x, offset_y = request.args['offset_x'], request.args['offset_y']
 	leader_id = request.args['leader_id']
 	session_id = request.args['session_id']
-	g.pusher[sessionId].trigger("scroll", {"offset_x": offset_x, "offset_y": offset_y, "leader_id": leader_id})
+	g.pusher[session_id].trigger("scroll", {"offset_x": offset_x, "offset_y": offset_y, "leader_id": leader_id})
 	return ""
 
 @app.route("/key")
