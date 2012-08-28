@@ -64,6 +64,7 @@ var our_key_handler = function(event) {
 };
 
 var our_new_window_handler = function(url, name, specs, replace) {
+	alert("Window Handler going");
 	window.location.href = url;
 }
 
