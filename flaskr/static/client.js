@@ -30,7 +30,7 @@ var install_message_listener = function(e) {
 		__my_parent_win.postMessage({"type": "location", 
 			"val": window.location.href}, "*");
 		window.onmessage = apply_event;
-	};
+	}
 	else {
 		console.log("client.js i'm NOT connecting to parent")
 	}
