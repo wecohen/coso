@@ -25,15 +25,11 @@ var install_message_listener = function(e) {
 	var data = e.data;
 	var win = e.source;
 	if (__origin === "http://coso.herokuapp.com") {
-		console.log("client.js i'm connecting to parent")
 		__my_parent_win = win;
 		__my_parent_win.postMessage({"type": "location", 
 			"val": window.location.href}, "*");
 		window.onmessage = apply_event;
-	}
-	else {
-		console.log("client.js i'm NOT connecting to parent")
-	}
+	};
 };
 
 window.onmessage = install_message_listener;

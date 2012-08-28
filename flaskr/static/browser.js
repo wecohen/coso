@@ -8,6 +8,7 @@ var click_execution = null; // refer to timeout on receipt of click message from
 var pusher = new Pusher('b31d655fa7f11bd6f11d'); // set up new session
 var channel = pusher.subscribe('channel_name'); // subscribe to this session
 channel.bind('URL_change', function(data) {
+    console.log("Pusher URL_change called")
     // pusher pushing to all subscribed to keep iframes at the same place, if
     // statement discludes the browser that originated the push (already updated).
 	if (browser_id != data["leader_id"]){
