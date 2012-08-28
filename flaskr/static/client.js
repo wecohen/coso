@@ -63,10 +63,15 @@ var our_key_handler = function(event) {
     }
 };
 
+var our_new_window_handler = function(url, name=none, specs=none, replace=none) {
+	window.location.href = url;
+}
+
 var install_coso = function() {
 	document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
 	window.onscroll = event_wrapper(window.onscroll, our_scroll_handler);
 	document.body.onkeyup = event_wrapper(document.body.onkeyup, our_key_handler);
+	window.open = our_new_window_handler;
 };
 
 setTimeout("install_coso();", 100);
