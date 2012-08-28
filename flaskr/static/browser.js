@@ -5,7 +5,7 @@ var browser_id = Math.random(); // assigns id to identify each browser in sessio
 var pushing = false; // value to indicate when content changes were results of pushes
 var click_execution = null; // refer to timeout on receipt of click message from iframe
 
-var pusher = new Pusher('b31d655fa7f11bd6f11d'); // set up new session
+var pusher = new Pusher(pusherKey); // set up new session
 var channel = pusher.subscribe('channel_name'); // subscribe to this session
 channel.bind('URL_change', function(data) {
     console.log("Pusher URL_change called")

@@ -39,13 +39,13 @@ def create_session():
 	session_id = create_session_id()
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
 	# return jsonify(session_id = session_id, unique_token = unique_token)
-	return render_template("screentest.html", session_id=session_id, unique_token=unique_token)	
+	return render_template("screentest.html", session_id=session_id, unique_token=unique_token, pusher_key=pusher.key)	
 
 @app.route("/join", methods = ["GET"])
 def join_session():
 	session_id = request.args.get("session_id")
 	unique_token = opentok_sdk.generate_token(session_id, None, None, None)
-	return render_template("screentest.html", session_id = session_id, unique_token=unique_token)
+	return render_template("screentest.html", session_id = session_id, unique_token=unique_token, pusher_key=pusher.key)
 
 @app.route("/navigate")
 def navigate():
