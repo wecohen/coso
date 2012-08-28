@@ -5,9 +5,6 @@ import OpenTokSDK
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 app = Flask(__name__)
-# app.config.from_object(__name__)
-# app.config.from_envvar("FLASKR_SETTINGS", silent = True)
-
 
 pusher.app_id = config.pusher_app_id
 pusher.key = config.pusher_key
@@ -19,7 +16,6 @@ api_secret = config.OT_apiSecret
 OT_token = config.OT_token
 api_url = "https://api.opentok.com/hl"
 opentok_sdk = OpenTokSDK.OpenTokSDK(OT_apiKey, api_secret, staging=True)
-
 
 @app.before_request
 def setup_function():
@@ -49,31 +45,34 @@ def join_session():
 
 @app.route("/navigate")
 def navigate():
-	print("Pushertest.py Navigate")
 	dest_url = request.args['destination_url']
 	leader_id = request.args['leader_id']
-	g.pusher['channel_name'].trigger("URL_change", {"url": dest_url, "leader_id": leader_id})
+	session_id = request.args['session_id']
+	g.pusher[sessionId].trigger("URL_change", {"url": dest_url, "leader_id": leader_id})
 	return ""
 
 @app.route("/click")
 def click():
 	x, y = request.args['x'], request.args['y']
 	leader_id = request.args['leader_id']
-	g.pusher['channel_name'].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
+	session_id = request.args['session_id']
+	g.pusher[sessionId].trigger("click", {"x": x, "y": y, "leader_id": leader_id})
 	return ""
 
 @app.route("/scroll")
 def scroll():
 	offset_x, offset_y = request.args['offset_x'], request.args['offset_y']
 	leader_id = request.args['leader_id']
-	g.pusher['channel_name'].trigger("scroll", {"offset_x": offset_x, "offset_y": offset_y, "leader_id": leader_id})
+	session_id = request.args['session_id']
+	g.pusher[sessionId].trigger("scroll", {"offset_x": offset_x, "offset_y": offset_y, "leader_id": leader_id})
 	return ""
 
 @app.route("/key")
 def key():
 	code = request.args['code']
 	leader_id = request.args['leader_id']
-	g.pusher['channel_name'].trigger("key", {"code": code, "leader_id": leader_id})
+	session_id = request.args['session_id']
+	g.pusher[session_id].trigger("key", {"code": code, "leader_id": leader_id})
 	return ""
 
 @app.route ("/test1")

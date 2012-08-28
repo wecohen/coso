@@ -1,12 +1,13 @@
 // browser sharing js
 console.log(sessionId);
+console.log("yeah");
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
 var pushing = false; // value to indicate when content changes were results of pushes
 var click_execution = null; // refer to timeout on receipt of click message from iframe
 
 var pusher = new Pusher(pusherKey); // set up new session
-var channel = pusher.subscribe('channel_name'); // subscribe to this session
+var channel = pusher.subscribe(sessionId); // subscribe to this session
 channel.bind('URL_change', function(data) {
     console.log("Pusher URL_change called")
     // pusher pushing to all subscribed to keep iframes at the same place, if
@@ -85,7 +86,7 @@ var message_listener = function(event) {
     		if (pushing == false) {
                 click_execution = setTimeout(function() {
                 	$.get("http://coso.herokuapp.com/click", 
-        				{"x": event.data.target[0], "y": event.data.target[1], "leader_id" : leader_id});
+        				{"x": event.data.target[0], "y": event.data.target[1], "leader_id" : leader_id, "session_id": sessionId});
                 }, 500); // push click event to rest of session after 500 milliseconds
 			}
             else if (pushing == true) {
@@ -100,7 +101,7 @@ var message_listener = function(event) {
         	var leader_id = browser_id; // adding an identifier that this iframe originated event
         	if (pushing == false) {
                 // if load was not the result of pushing (was a new action), call pusher function
-		        $.get("http://coso.herokuapp.com/navigate", {"destination_url" : new_url, "leader_id" : leader_id});
+		        $.get("http://coso.herokuapp.com/navigate", {"destination_url" : new_url, "leader_id" : leader_id, "session_id": sessionId});
 			}
             else if (pushing == true) {
                 // if load was the result of pushing, turn off indicator watching for this
@@ -112,7 +113,7 @@ var message_listener = function(event) {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
             if (pushing == false) {
                 $.get("http://coso.herokuapp.com/scroll", {"offset_x" : event.data.offset[0],
-                 "offset_y" : event.data.offset[1], "leader_id" : leader_id});
+                 "offset_y" : event.data.offset[1], "leader_id" : leader_id, "session_id": sessionId});
             }
             else if (pushing == true) {
                 pushing = false;
@@ -123,7 +124,7 @@ var message_listener = function(event) {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
             if (pushing == false) {
                 console.log(event.data.code)
-                $.get("http://coso.herokuapp.com/key", {"code": event.data.code, "leader_id": leader_id});
+                $.get("http://coso.herokuapp.com/key", {"code": event.data.code, "leader_id": leader_id, "session_id": sessionId});
             }
             else if (pushing == true) {
                 pushing = false;
