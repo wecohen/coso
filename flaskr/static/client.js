@@ -46,9 +46,10 @@ var event_wrapper = function(fn1, fn2) {
 var our_click_handler = function(event) {
 	elem = document.elementFromPoint(event.pageX, event.pageY);
 	if (elem.tagName == "A") {
-		our_new_window_handler(elem.href)
+		our_new_window_handler(elem.href);
+		return false;
 	}
-    if (__my_parent_win !== null) {
+    else if (__my_parent_win !== null) {
         __my_parent_win.postMessage({"type": "click", 
         	"target": [event.pageX, event.pageY]}, "*");
     }
@@ -70,6 +71,7 @@ var our_key_handler = function(event) {
 var our_new_window_handler = function(url, name, specs, replace) {
 	alert("Window Handler going");
 	window.location.href = url;
+	return false;
 }
 
 var install_coso = function() {
