@@ -63,7 +63,7 @@ var our_key_handler = function(event) {
     }
 };
 
-var our_new_window_handler = function(url, name=none, specs=none, replace=none) {
+var our_new_window_handler = function(url, name, specs, replace) {
 	window.location.href = url;
 }
 
