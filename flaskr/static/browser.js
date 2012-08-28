@@ -1,5 +1,4 @@
 // browser sharing js
-console.log("hi");
 console.log(sessionId);
 
 var browser_id = Math.random(); // assigns id to identify each browser in session
@@ -39,14 +38,12 @@ channel.bind('key', function(data) {
 });
 
 function navigate(url) {
-    console.log("browser.js navigate called")
     // change iframe location to url function receives. This should also trigger load event.
 	$("iframe#main_frame").attr("src", url);
 	return false;
 }
 
 function navigate_request() {
-    console.log("browser.js navigate_request called")
     // clean up URL entered by user and call navigate, providing the cleaned URL
     var destination = $("input#destination_url").val();
     if(destination.substring(0, 4) != "http"){
@@ -86,7 +83,7 @@ var message_listener = function(event) {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
     		if (pushing == false) {
                 click_execution = setTimeout(function() {
-                	$.get("http://localhost:5000/click", 
+                	$.get("http://coso.herokuapp.com/click", 
         				{"x": event.data.target[0], "y": event.data.target[1], "leader_id" : leader_id});
                 }, 500); // push click event to rest of session after 500 milliseconds
 			}
@@ -102,7 +99,7 @@ var message_listener = function(event) {
         	var leader_id = browser_id; // adding an identifier that this iframe originated event
         	if (pushing == false) {
                 // if load was not the result of pushing (was a new action), call pusher function
-		        $.get("http://localhost:5000/navigate", {"destination_url" : new_url, "leader_id" : leader_id});
+		        $.get("http://coso.herokuapp.com/navigate", {"destination_url" : new_url, "leader_id" : leader_id});
 			}
             else if (pushing == true) {
                 // if load was the result of pushing, turn off indicator watching for this
@@ -113,7 +110,7 @@ var message_listener = function(event) {
         else if (event.data.type == "scroll") {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
             if (pushing == false) {
-                $.get("http://localhost:5000/scroll", {"offset_x" : event.data.offset[0],
+                $.get("http://coso.herokuapp.com/scroll", {"offset_x" : event.data.offset[0],
                  "offset_y" : event.data.offset[1], "leader_id" : leader_id});
             }
             else if (pushing == true) {
@@ -125,7 +122,7 @@ var message_listener = function(event) {
             var leader_id = browser_id; // adding an identifier that this iframe originated event
             if (pushing == false) {
                 console.log(event.data.code)
-                $.get("http://localhost:5000/key", {"code": event.data.code, "leader_id": leader_id});
+                $.get("http://coso.herokuapp.com/key", {"code": event.data.code, "leader_id": leader_id});
             }
             else if (pushing == true) {
                 pushing = false;
