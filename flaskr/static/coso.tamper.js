@@ -1,3 +1,7 @@
+// For collaborative browser sharing to work, install the TamperMonkey plugin for
+// Chrome from https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo
+// then paste the below into a new script.
+
 // ==UserScript==
 // @name       Coso script
 // @namespace  http://coso.herokuapp.com

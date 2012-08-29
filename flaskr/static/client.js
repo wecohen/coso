@@ -40,6 +40,10 @@ var event_wrapper = function(fn1, fn2) {
 		if (fn1 !== null && result !== false) {
 			fn1(event);
 		}
+		else if (result == false) {
+			event.preventDefault;
+			event.stopPropagation;
+		}
 	});
 };
 
