@@ -38,9 +38,11 @@ var event_wrapper = function(fn1, fn2) {
 	return (function(event) {
 		var result = fn2(event);
 		if (fn1 !== null && result !== false) {
+			alert("now i will let the page have its way");
 			fn1(event);
 		}
 		else if (result == false) {
+			alert("now i will try to stop this evil");
 			event.preventDefault;
 			event.stopPropagation;
 		}
@@ -75,7 +77,7 @@ var our_key_handler = function(event) {
 
 var our_new_window_handler = function(url, name, specs, replace) {
 	alert("Window Handler going");
-	window.location.href = url;
+	// window.location.href = url;
 	return false;
 }
 
