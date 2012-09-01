@@ -54,23 +54,19 @@ var our_click_handler = function(event) {
 		our_new_window_handler(elem.href);
 		return false;
 	}
-    else if (__my_parent_win !== null) {
+    else {
         __my_parent_win.postMessage({"type": "click", 
         	"target": [event.pageX, event.pageY]}, "*");
     }
 };
 
 var our_scroll_handler = function(event) {
-	if (__my_parent_win !== null) {
-        __my_parent_win.postMessage({"type": "scroll", 
-        	"offset": [window.pageXOffset, window.pageYOffset]}, "*");
-    }
+    __my_parent_win.postMessage({"type": "scroll", 
+    	"offset": [window.pageXOffset, window.pageYOffset]}, "*");
 };
 
 var our_key_handler = function(event) {
-    if (__my_parent_win !== null) {
-        __my_parent_win.postMessage({"type": "key", "code": document.activeElement.value}, "*");
-    }
+    __my_parent_win.postMessage({"type": "key", "code": document.activeElement.value}, "*");
 };
 
 var our_new_window_handler = function(url, name, specs, replace) {
@@ -79,15 +75,16 @@ var our_new_window_handler = function(url, name, specs, replace) {
 }
 
 var install_coso = function() {
-	links = document.body.getElementsByTagName('a');
-	for (i in links) {
-    links[i].target = "";
-	} 
-	document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
-	window.onscroll = event_wrapper(window.onscroll, our_scroll_handler);
-	document.body.onkeyup = event_wrapper(document.body.onkeyup, our_key_handler);
-	window.open = our_new_window_handler;
+	if (__my_parent_win !== null) {
+		links = document.body.getElementsByTagName('a');
+		for (i in links) {
+	    links[i].target = "";
+		} 
+		document.body.onclick = event_wrapper(document.body.onclick, our_click_handler);
+		window.onscroll = event_wrapper(window.onscroll, our_scroll_handler);
+		document.body.onkeyup = event_wrapper(document.body.onkeyup, our_key_handler);
+		window.open = our_new_window_handler;
+	}
 };
 
 setTimeout("install_coso();", 100);
-
