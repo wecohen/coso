@@ -38,11 +38,9 @@ var event_wrapper = function(fn1, fn2) {
 	return (function(event) {
 		var result = fn2(event);
 		if (fn1 !== null && result !== false) {
-			alert("now i will let the page have its way");
 			fn1(event);
 		}
 		else if (result == false) {
-			alert("now i will try to stop this evil");
 			event.preventDefault;
 			event.stopPropagation;
 			return false;
@@ -51,14 +49,13 @@ var event_wrapper = function(fn1, fn2) {
 };
 
 var our_click_handler = function(event) {
-	elem = document.elementFromPoint(event.pageX, event.pageY);
-	if (elem.tagName == "A" && elem.target) {
-		our_new_window_handler(elem.href);
-		alert("ooh a tag");
-		return false;
-	}
-    else if (__my_parent_win !== null) {
-    	alert("not a tag");
+	// elem = document.elementFromPoint(event.pageX, event.pageY);
+	// if (elem.tagName == "A" && elem.target) {
+	// 	our_new_window_handler(elem.href);
+	// 	return false;
+	// }
+ //    else 
+    if (__my_parent_win !== null) {
         __my_parent_win.postMessage({"type": "click", 
         	"target": [event.pageX, event.pageY]}, "*");
     }
