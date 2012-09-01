@@ -54,7 +54,6 @@ var our_click_handler = function(event) {
 	elem = document.elementFromPoint(event.pageX, event.pageY);
 	if (elem.tagName == "A" && elem.target) {
 		our_new_window_handler(elem.href);
-		alert("ooh a tag");
 		return false;
 	}
     else if (__my_parent_win !== null) {
@@ -77,8 +76,7 @@ var our_key_handler = function(event) {
 };
 
 var our_new_window_handler = function(url, name, specs, replace) {
-	alert("Window Handler going");
-	// window.location.href = url;
+	window.location.href = url;
 	return false;
 }
 
