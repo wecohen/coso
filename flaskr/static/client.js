@@ -45,6 +45,7 @@ var event_wrapper = function(fn1, fn2) {
 			alert("now i will try to stop this evil");
 			event.preventDefault;
 			event.stopPropagation;
+			return false;
 		}
 	});
 };
